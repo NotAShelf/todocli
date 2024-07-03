@@ -1,14 +1,19 @@
 # Todo CLI
 
+<p align="center">
+    <img src=".github/assets/todo.png" alt="Demo">
+</p>
+
 <!--toc:start-->
 
 - [Todo CLI](#todo-cli)
-  - [About](#about) - [Build From Source](#build-from-source) -
-  [Installation](#installation) - [Uninstalling](#uninstalling) -
-  [Usage](#usage)
+  - [About](#about)
+    - [Build From Source](#build-from-source)
+      - [Installation](#installation)
+      - [Uninstalling](#uninstalling)
+    - [Usage](#usage)
+  - [License](#license)
   <!--toc:end-->
-
-![prompt](https://raw.githubusercontent.com/NotAShelf/todocli/main/.github/assets/todo.png)
 
 ## About
 
