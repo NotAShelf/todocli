@@ -1,45 +1,42 @@
-Todo CLI
-============
+# Todo CLI
 
+<!--toc:start-->
 
-![prompt](https://raw.githubusercontent.com/HxX2/todocli/main/images/todo.png)
+- [Todo CLI](#todo-cli)
+  - [About](#about) - [Build From Source](#build-from-source) -
+  [Installation](#installation) - [Uninstalling](#uninstalling) -
+  [Usage](#usage)
+  <!--toc:end-->
 
-
-**Table of Contents**
-
-<!-- toc -->
-
-- [About](#about)
-  * [Installing](#installing)
-  * [Uninstalling](#uninstalling)
-  * [Build From Source](#build-from-source)
-  * [Usage](#usage)
-
-<!-- tocstop -->
+![prompt](https://raw.githubusercontent.com/NotAShelf/todocli/main/.github/assets/todo.png)
 
 ## About
 
-Todo CLI is a simple to do list to manage your tasks.
-Written in GO and styled with [Nerd Fonts](https://www.nerdfonts.com/)
-
-### Installing
-
-```console
-./install.sh
-```
-
-### Uninstalling
-
-```console
-./uninstall.sh
-```
+Todo CLI is a simple to do list to manage your tasks. Written in Go and styled
+with [Nerd Fonts](https://www.nerdfonts.com/)
 
 ### Build From Source
 
 Install Go and build with this command:
 
-```console
-go build
+```bash
+go build -o todocli # this will output a binary called todocli
+```
+
+#### Installation
+
+On traditional distros, you may copy the built binary to `/usr/local/bin`.
+
+```bash
+cp -rv todocli /usr/local/bin
+```
+
+#### Uninstalling
+
+Removing is quite simple:
+
+```bash
+rm -rf /usr/local/bin/todocli
 ```
 
 ### Usage
@@ -49,18 +46,26 @@ To add a task to the list
 ```console
 todo -a <Task String>
 ```
+
 Toggle a task as done or undone
 
 ```console
 todo -t <Task number>
 ```
+
 Remove a Task from the list
 
 ```console
 todo -r <Task Number>
 ```
-Opens editor to edite the raw file of the list (it uses the $EDITOR env var)
+
+Opens editor to edit the raw file of the list (it uses the `$EDITOR` environment
+variable)
 
 ```console
-todo -e 
+todo -e
 ```
+
+## License
+
+All rights belong to [@HxX2](https://github.com/HxX2/todocli).
