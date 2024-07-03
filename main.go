@@ -4,16 +4,17 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"github.com/fatih/color"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 var todoFile string
 
-func error(msg string) {
+func customErr(msg string) {
 	color.Set(color.FgRed, color.Bold)
 	fmt.Print("Error: ")
 	color.Set(color.Reset)
@@ -64,16 +65,16 @@ func printList() {
 	}
 
 	if err := scanner.Err(); err != nil {
-		error("Can't read file")
+		customErr("Can't read file")
 	}
 }
 
-func remTask(taskId int) {
+func remTask(taskID int) {
 	i := 1
 	file, err := os.Open(todoFile)
 
 	if err != nil {
-		error("Can't open file")
+		customErr("Can't open file")
 	}
 
 	defer file.Close()
@@ -84,19 +85,19 @@ func remTask(taskId int) {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		if i != taskId {
+		if i != taskID {
 			newLines = append(newLines, line)
 		}
 		i++
 	}
 
 	if err := scanner.Err(); err != nil {
-		error("Can't read file")
+		customErr("Can't read file")
 	}
 
 	file, err = os.Create(todoFile)
 	if err != nil {
-		error("Can't create file")
+		customErr("Can't create file")
 		return
 	}
 	defer file.Close()
@@ -112,7 +113,7 @@ func addTask(task string) {
 	file, err := os.OpenFile(todoFile, os.O_APPEND|os.O_WRONLY, 0644)
 
 	if err != nil {
-		error("Can't open file")
+		customErr("Can't open file")
 	}
 	defer file.Close()
 
@@ -120,19 +121,19 @@ func addTask(task string) {
 
 	_, err = file.WriteString(ftask)
 	if err != nil {
-		error("Can't write in file")
+		customErr("Can't write in file")
 		return
 	}
 
 	printList()
 }
 
-func togleTask(taskId int) {
+func togleTask(taskID int) {
 	i := 1
 	file, err := os.Open(todoFile)
 
 	if err != nil {
-		error("Can't open file")
+		customErr("Can't open file")
 	}
 
 	defer file.Close()
@@ -143,7 +144,7 @@ func togleTask(taskId int) {
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		if i == taskId {
+		if i == taskID {
 			if strings.Contains(line, "X") {
 				line = strings.Replace(line, "X", "", 1)
 			} else {
@@ -155,12 +156,12 @@ func togleTask(taskId int) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		error("Can't read file")
+		customErr("Can't read file")
 	}
 
 	file, err = os.Create(todoFile)
 	if err != nil {
-		error("Can't read file")
+		customErr("Can't read file")
 		return
 	}
 	defer file.Close()
@@ -176,14 +177,14 @@ func openEditor() {
 	editor := os.Getenv("EDITOR")
 
 	if editor == "" {
-		error("Can't open editor [$EDITOR is to not set]")
+		customErr("Can't open editor [$EDITOR is to not set]")
 		return
 	}
 
 	err := exec.Command(editor, todoFile).Run()
 
 	if err != nil {
-		error("Failed to open editor")
+		customErr("Failed to open editor")
 		fmt.Println(err)
 		return
 	}
@@ -199,21 +200,21 @@ func todoInit() {
 	if os.IsNotExist(err) {
 		err = os.MkdirAll(configDir, 0755)
 		if err != nil {
-			error("Can't create config directory")
+			customErr("Can't create config directory")
 			fmt.Println(err)
 			return
 		}
 
 		file, err := os.Create(filePath)
 		if err != nil {
-			error("Can't create todo.txt file")
+			customErr("Can't create todo.txt file")
 			fmt.Println(err)
 			return
 		}
 
 		file.Close()
 	} else if err != nil {
-		error("Can't check file")
+		customErr("Can't check file")
 		fmt.Println(err)
 		return
 	}
